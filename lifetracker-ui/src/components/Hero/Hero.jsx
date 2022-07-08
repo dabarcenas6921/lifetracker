@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardMedia, Typography, Button } from "@mui/material";
-import "./Hero.css";
 
 export default function Hero() {
   return (
@@ -25,7 +24,7 @@ export default function Hero() {
             sx={{
               position: "absolute",
               color: "black",
-              top: 70,
+              top: 100,
               left: "25%",
               transform: "translateX(-50%)",
               fontWeight: "bold",
@@ -41,7 +40,7 @@ export default function Hero() {
             sx={{
               position: "absolute",
               color: "black",
-              top: 280,
+              top: 310,
               left: "25%",
               transform: "translateX(-50%)",
             }}
@@ -54,7 +53,7 @@ export default function Hero() {
             variant="contained"
             sx={{
               position: "absolute",
-              top: 400,
+              top: 430,
               left: "25%",
               transform: "translateX(-50%)",
               width: "200px",
