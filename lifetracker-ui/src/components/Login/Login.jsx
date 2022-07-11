@@ -35,10 +35,14 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    //Getting data from login sheet.
+    const email = data.get("email");
+    const password = data.get("password");
+    const loginInfo = {
+      email: email,
+      password: password,
+    };
+    console.log(loginInfo);
   };
 
   return (

@@ -2,8 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const authRouter = require("./routes/auth");
+const { NotFoundError } = require("./utils/errors");
+const { PORT } = require("./config");
 const app = express();
-const port = 3001;
 
 app.use(cors());
 
@@ -13,10 +14,19 @@ app.use(express.json());
 
 app.use("/auth", authRouter);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.use((req, res, next) => {
+  return next(new NotFoundError());
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message;
+
+  return res.status(status).json({
+    error: { message, status },
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running http://localhost:${PORT}`);
 });

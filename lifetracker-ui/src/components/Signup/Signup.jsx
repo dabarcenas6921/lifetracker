@@ -33,10 +33,18 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    //Printing out the data retreived from the signup sheet
+    const email = data.get("email");
+    const password = data.get("password");
+    const firstName = data.get("firstName");
+    const lastName = data.get("lastName");
+    const signupInfo = {
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+    };
+    console.log(signupInfo);
   };
 
   return (
