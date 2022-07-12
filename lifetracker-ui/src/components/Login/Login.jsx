@@ -36,10 +36,10 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     //Getting data from login sheet.
-    const email = data.get("email");
+    const username = data.get("username");
     const password = data.get("password");
     const loginInfo = {
-      email: email,
+      username: username,
       password: password,
     };
     console.log(loginInfo);
@@ -72,10 +72,10 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
               />
               <TextField

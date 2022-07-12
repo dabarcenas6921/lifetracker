@@ -35,11 +35,13 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     //Printing out the data retreived from the signup sheet
     const email = data.get("email");
+    const username = data.get("username");
     const password = data.get("password");
     const firstName = data.get("firstName");
     const lastName = data.get("lastName");
     const signupInfo = {
       email: email,
+      username: username,
       password: password,
       firstName: firstName,
       lastName: lastName,
@@ -101,6 +103,16 @@ export default function SignUp() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="username"
+                    label="Username"
+                    id="username"
+                    autoComplete="username"
                   />
                 </Grid>
                 <Grid item xs={12}>
