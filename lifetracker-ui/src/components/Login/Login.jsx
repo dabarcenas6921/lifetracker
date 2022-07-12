@@ -12,6 +12,8 @@ import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import Navbar from "../Navbar/Navbar";
 import { theme } from "../../theme";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -32,7 +34,9 @@ function Copyright(props) {
 }
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     //Getting data from login sheet.
@@ -43,6 +47,18 @@ export default function SignIn() {
       password: password,
     };
     console.log(loginInfo);
+
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/auth/login",
+        loginInfo
+      );
+      if (res?.data?.user) {
+        navigate("/activity");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

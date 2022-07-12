@@ -10,6 +10,8 @@ import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../theme";
 import Navbar from "../Navbar/Navbar";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -30,7 +32,9 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     //Printing out the data retreived from the signup sheet
@@ -43,10 +47,22 @@ export default function SignUp() {
       email: email,
       username: username,
       password: password,
-      firstName: firstName,
-      lastName: lastName,
+      first_name: firstName,
+      last_name: lastName,
     };
     console.log(signupInfo);
+
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/auth/register",
+        signupInfo
+      );
+      if (res?.data?.user) {
+        navigate("/activity");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
