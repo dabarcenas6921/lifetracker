@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, CardMedia, Typography, Button } from "@mui/material";
+import { Card, CardMedia, Typography, Button, Container } from "@mui/material";
 
 export default function Hero() {
   return (
-    <div className="hero">
-      <Card>
+    <Container maxWidth="xl" disableGutters={true}>
+      <Card sx={{ boxShadow: 0 }}>
         <div style={{ position: "relative" }}>
           <CardMedia
             sx={{
@@ -16,7 +16,7 @@ export default function Hero() {
             component="img"
             image="https://i.guim.co.uk/img/media/10690e25ff08f2d5b87e204e7fa71530c5468b60/73_0_1713_1028/master/1713.jpg?width=880&quality=45&fit=max&dpr=2&s=7893b57145fc217a8c0744e417f45872"
             title="launch image"
-            alt="launch imae"
+            alt="launch image"
           />
           <Typography
             variant="h2"
@@ -24,8 +24,8 @@ export default function Hero() {
             sx={{
               position: "absolute",
               color: "black",
-              top: 100,
-              left: "25%",
+              top: 170,
+              left: "22%",
               transform: "translateX(-50%)",
               fontWeight: "bold",
               fontSize: "5rem",
@@ -40,8 +40,8 @@ export default function Hero() {
             sx={{
               position: "absolute",
               color: "black",
-              top: 310,
-              left: "25%",
+              top: 380,
+              left: "22%",
               transform: "translateX(-50%)",
             }}
           >
@@ -53,8 +53,8 @@ export default function Hero() {
             variant="contained"
             sx={{
               position: "absolute",
-              top: 430,
-              left: "25%",
+              top: 505,
+              left: "22%",
               transform: "translateX(-50%)",
               width: "200px",
               height: "70px",
@@ -65,6 +65,6 @@ export default function Hero() {
           </Button>
         </div>
       </Card>
-    </div>
+    </Container>
   );
 }

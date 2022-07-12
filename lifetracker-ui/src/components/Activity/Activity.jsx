@@ -6,7 +6,7 @@ export default function Portal() {
   return (
     <div className="Portal">
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: "10px" }}>
+      <Container maxWidth="xl" sx={{ mt: "10px" }}>
         <Typography
           variant="h3"
           align="left"

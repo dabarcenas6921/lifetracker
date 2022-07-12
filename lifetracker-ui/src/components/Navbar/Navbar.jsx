@@ -13,7 +13,7 @@ import RunCircleIcon from "@mui/icons-material/RunCircle";
 
 function Navbar() {
   return (
-    <Container maxWidth="lg" sx={{ borderBottom: "solid #E2E8F0 2px" }}>
+    <Container maxWidth="xl" sx={{ borderBottom: "solid #E2E8F0 2px" }}>
       <AppBar position="sticky" elevation={0}>
         <Toolbar>
           <IconButton
