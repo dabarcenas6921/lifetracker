@@ -8,3 +8,13 @@ CREATE TABLE users(
     created_at      TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at      TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+CREATE TABLE nutrition (
+    id              SERIAL PRIMARY KEY,
+    name            TEXT NOT NULL,
+    category        TEXT NOT NULL,
+    calories        INTEGER NOT NULL DEFAULT 0,
+    image_url       TEXT NOT NULL,
+    user_id         INTEGER NOT NULL,
+    created_at      TIMESTAMP NOT NULL DEFAULT NOW()
+);

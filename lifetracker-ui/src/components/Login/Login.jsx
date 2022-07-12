@@ -65,7 +65,7 @@ export default function SignIn() {
     <div className="login">
       <Navbar />
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="sm" disableGutters={true}>
           <CssBaseline />
           <Box
             sx={{
@@ -82,7 +82,7 @@ export default function SignIn() {
               component="form"
               onSubmit={handleSubmit}
               noValidate
-              sx={{ mt: 1 }}
+              sx={{ mt: 2 }}
             >
               <TextField
                 margin="normal"

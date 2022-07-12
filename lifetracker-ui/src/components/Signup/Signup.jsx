@@ -69,7 +69,7 @@ export default function SignUp() {
     <div className="signup">
       <Navbar />
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="sm" disableGutters={true}>
           <CssBaseline />
           <Box
             sx={{
