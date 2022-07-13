@@ -19,6 +19,7 @@ function getDatabaseUri() {
 }
 
 const BCRYPT_WORK_FACTOR = 13;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 console.log("LifeTracker config:".yellow);
 console.log("Port:".blue, PORT);
@@ -30,4 +31,5 @@ module.exports = {
   PORT,
   BCRYPT_WORK_FACTOR,
   getDatabaseUri,
+  SECRET_KEY,
 };

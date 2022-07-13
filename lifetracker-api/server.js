@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const authRouter = require("./routes/auth");
 const { NotFoundError } = require("./utils/errors");
 const { PORT } = require("./config");
+const security = require("./middleware/security");
 const app = express();
 
 app.use(cors());
@@ -11,6 +12,12 @@ app.use(cors());
 app.use(morgan("tiny"));
 
 app.use(express.json());
+
+/** Convenience middleware to handle common auth cases in routes. */
+
+// extract user from jwt token sent in authorization header
+// attach credentials to res.locals.user
+app.use(security.extractUserFromJwt);
 
 app.use("/auth", authRouter);
 
