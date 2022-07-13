@@ -14,6 +14,7 @@ import Navbar from "../Navbar/Navbar";
 import { theme } from "../../theme";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -33,7 +34,7 @@ function Copyright(props) {
   );
 }
 
-export default function SignIn() {
+export default function Login({ user, setUser }) {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -54,6 +55,8 @@ export default function SignIn() {
         loginInfo
       );
       if (res?.data?.user) {
+        setUser(res.data.user);
+        console.log(res.data.user);
         navigate("/activity");
       }
     } catch (err) {

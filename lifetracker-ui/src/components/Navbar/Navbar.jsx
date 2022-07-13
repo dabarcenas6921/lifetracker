@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import RunCircleIcon from "@mui/icons-material/RunCircle";
 
-function Navbar() {
+function Navbar({ user }) {
   return (
     <Container
       maxWidth="xl"
