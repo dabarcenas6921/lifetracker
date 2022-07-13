@@ -34,6 +34,10 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running http://localhost:${PORT}`);
 });

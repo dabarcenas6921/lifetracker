@@ -14,7 +14,6 @@ import Navbar from "../Navbar/Navbar";
 import { theme } from "../../theme";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 function Copyright(props) {
   return (
