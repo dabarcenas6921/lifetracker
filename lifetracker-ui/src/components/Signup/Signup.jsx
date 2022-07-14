@@ -31,7 +31,7 @@ function Copyright(props) {
   );
 }
 
-export default function SignUp() {
+export default function SignUp({ setUser }) {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -58,6 +58,7 @@ export default function SignUp() {
         signupInfo
       );
       if (res?.data?.user) {
+        setUser(res.data.user);
         navigate("/activity");
       }
     } catch (err) {

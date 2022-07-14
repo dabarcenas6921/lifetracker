@@ -37,10 +37,18 @@ function Navbar({ user }) {
             </Link>
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button color="inherit">Activity</Button>
-            <Button color="inherit">Exercise</Button>
-            <Button color="inherit">Nutrition</Button>
-            <Button color="inherit">Sleep</Button>
+            <Button color="inherit" href="/activity">
+              Activity
+            </Button>
+            <Button color="inherit" href="/exercise">
+              Exercise
+            </Button>
+            <Button color="inherit" href="/nutrition">
+              Nutrition
+            </Button>
+            <Button color="inherit" href="/sleep">
+              Sleep
+            </Button>
             <Button href="/login" color="secondary" variant="contained">
               Login
             </Button>

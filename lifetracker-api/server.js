@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const authRouter = require("./routes/auth");
+const topicRouter = require("./routes/topics");
 const { NotFoundError } = require("./utils/errors");
 const { PORT } = require("./config");
 const security = require("./middleware/security");
@@ -15,11 +16,13 @@ app.use(express.json());
 
 /** Convenience middleware to handle common auth cases in routes. */
 
-// extract user from jwt token sent in authorization header
-// attach credentials to res.locals.user
+//middleware that checks if JWT token exists and verifies it if it does exist.
+//if they exist, it extracts the user from the jwt token
+//In all the future routes, this helps to know if the request is authenticated or not.
 app.use(security.extractUserFromJwt);
 
 app.use("/auth", authRouter);
+app.use("/addTopic/", topicRouter);
 
 app.use((req, res, next) => {
   return next(new NotFoundError());

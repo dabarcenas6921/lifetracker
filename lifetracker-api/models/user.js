@@ -13,6 +13,7 @@ class User {
       username: user.username,
     };
   }
+
   static async login(credentials) {
     //These next few lines of code check if the credentials have a filled outusername or password field.
     //if there isn't, throw an error.
