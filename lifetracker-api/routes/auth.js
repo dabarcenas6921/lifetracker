@@ -6,10 +6,10 @@ const router = express.Router();
 
 router.get("/me", security.requireAuthenticatedUser, async (req, res, next) => {
   try {
-    const { email } = res.locals.user;
-    const user = await User.fetchUserByEmail(email);
-    const orders = await Order.listOrdersForUser(user);
-    return res.status(200).json({ user, orders });
+    console.log(res.locals.user);
+    const user = res.locals.user;
+    // const user = await User.fetchUserByUsername(username);
+    return res.status(200).json({ user });
   } catch (err) {
     next(err);
   }
@@ -35,7 +35,7 @@ router.post("/register", async (req, res, next) => {
     //Make a new token for the registered user
     const token = createUserJwt(user);
     console.log(token);
-    return res.status(201).json({ user, token });
+    return res.status(201).json({ user: user, token: token });
   } catch (err) {
     next(err);
   }

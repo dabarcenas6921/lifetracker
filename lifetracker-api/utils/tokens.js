@@ -6,13 +6,16 @@ const generateToken = (data) => jwt.sign(data, SECRET_KEY);
 
 const createUserJwt = (creds) => {
   validateFields({
-    required: ["email"],
+    required: ["email", "username", "first_name", "last_name", "last_name"],
     obj: creds,
     location: "token generation",
   });
 
   const payload = {
     email: creds.email,
+    username: creds.username,
+    first_name: creds.first_name,
+    last_name: creds.last_name,
     isAdmin: creds.isAdmin || false,
   };
 
