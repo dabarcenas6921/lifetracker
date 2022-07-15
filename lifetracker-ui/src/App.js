@@ -19,6 +19,7 @@ function App() {
       const data = await apiClient.getUser();
       console.log(data.data);
       if (data.data) {
+        setIsLoggedIn(true);
         setUser(data.data.user);
       }
       // if (error) setError(error);
@@ -29,7 +30,6 @@ function App() {
 
     if (token) {
       apiClient.setToken(token);
-      setIsLoggedIn(true);
       fetchAuthedUser();
     } else {
       setIsLoggedIn(false);
@@ -85,6 +85,7 @@ function App() {
                   user={user}
                   setUser={setUser}
                   isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
                 />
               }
             ></Route>

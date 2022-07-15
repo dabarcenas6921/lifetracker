@@ -2,7 +2,7 @@ import { Typography, Card, CardContent, Container, Grid } from "@mui/material";
 import React from "react";
 import Login from "../Login/Login";
 
-export default function Activity({ user, setUser, isLoggedIn }) {
+export default function Activity({ user, setUser, isLoggedIn, setIsLoggedIn }) {
   if (isLoggedIn) {
     return (
       <div className="Portal">
@@ -149,6 +149,8 @@ export default function Activity({ user, setUser, isLoggedIn }) {
       </div>
     );
   } else {
-    return <Login user={user} setUser={setUser} />;
+    return (
+      <Login user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+    );
   }
 }

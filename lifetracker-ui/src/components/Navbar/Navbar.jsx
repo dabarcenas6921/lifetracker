@@ -10,14 +10,18 @@ import {
   Container,
 } from "@mui/material";
 import RunCircleIcon from "@mui/icons-material/RunCircle";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate();
+
   const handleOnClick = () => {
     if (isLoggedIn) {
       console.log("pushing button");
       setIsLoggedIn(false);
       setUser(null);
       localStorage.removeItem("token");
+      navigate("/");
     }
     console.log("pushing button2");
   };
@@ -72,9 +76,11 @@ function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
                 Login
               </Button>
             )}
-            <Button href="/register" color="secondary" variant="contained">
-              Register
-            </Button>
+            {isLoggedIn ? null : (
+              <Button href="/register" color="secondary" variant="contained">
+                Register
+              </Button>
+            )}
           </Stack>
         </Toolbar>
       </AppBar>
