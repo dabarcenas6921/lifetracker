@@ -2,7 +2,7 @@ const db = require("../db");
 const { BadRequestError } = require("../utils/errors");
 
 class Exercise {
-  static async addExercise(exercise, user) {
+  static async addExercise(exercise, userId) {
     //Adding an exercise into the database...
 
     //First check if all the fields are completed
@@ -19,6 +19,12 @@ class Exercise {
       }
     });
 
+    //Check for userId
+
+    if (!userId) {
+      throw new BadRequestError("Missing userId in the request body.");
+    }
+
     //Inserting the exercise data into the database.
     const result = await db.query(
       `
@@ -26,16 +32,18 @@ class Exercise {
             name,
             category,
             duration,
-            intensity
+            intensity,
+            user_id
         )
-        VALUES ($1,$2,$3,$4)
-        RETURNING id,name as exercise_name,category as exercise_category,duration,intensity;
+        VALUES ($1,$2,$3,$4,$5)
+        RETURNING id,name as exercise_name,category as exercise_category,duration,intensity,user_id;
         `,
       [
         exercise.exerciseName,
         exercise.exerciseCategory,
         exercise.duration,
         exercise.intensity,
+        userId,
       ]
     );
     //return the exercise
@@ -43,12 +51,14 @@ class Exercise {
     return exerciseRow;
   }
 
-  static async getExercises() {
-    //NEED TO CHANGE TO HAVE USER AS A PARAMETER AND A WHERE COMMAND
+  static async getExercises(userId) {
     const result = await db.query(
       `
-      SELECT * FROM exercise
-      `
+      SELECT * 
+      FROM exercise
+      WHERE user_id = $1;
+      `,
+      [userId]
     );
     return result.rows;
   }

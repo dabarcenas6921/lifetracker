@@ -11,8 +11,9 @@ router.post("/:topic", (req, res, next) => {
     console.log(`Posting into the ${topic} database..`);
     if (topic == "exercise") {
       //Taking the posted exerciseInfo object and inputting it into our database.
-      const exerciseInfo = req.body;
-      Exercise.addExercise(exerciseInfo);
+      const exerciseInfo = req.body.exerciseInfo;
+      const userId = req.body.userId;
+      Exercise.addExercise(exerciseInfo, userId);
       return res.status(201).json(req.body);
     }
     if (topic == "nutrition") {
@@ -29,13 +30,14 @@ router.post("/:topic", (req, res, next) => {
   }
 });
 
-router.get("/:topic", async (req, res, next) => {
+router.get("/:topic/:userId", async (req, res, next) => {
   try {
     const topic = req.params.topic;
-    console.log(`Getting ${topic} rows from the database...`);
+    const userId = req.params.userId;
+    console.log(`Getting ${topic} rows from the database from user ${userId}`);
     if (topic == "exercise") {
-      const exerciseData = await Exercise.getExercises();
-      res.status(201).json({ exerciseData: exerciseData });
+      const exerciseData = await Exercise.getExercises(userId);
+      res.status(201).json({ exerciseData: exerciseData, userId: userId });
     }
   } catch (e) {
     console.log(e);

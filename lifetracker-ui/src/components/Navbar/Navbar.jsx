@@ -21,7 +21,7 @@ function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
       setIsLoggedIn(false);
       setUser(null);
       localStorage.removeItem("token");
-      navigate("/");
+      navigate("/login");
     }
     console.log("pushing button2");
   };

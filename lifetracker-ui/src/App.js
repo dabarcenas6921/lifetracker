@@ -95,7 +95,10 @@ function App() {
               element={<Nutrition user={user} />}
             ></Route>
             <Route path="/sleep" element={<Sleep user={user} />}></Route>
-            <Route path="/addExercise" element={<AddExercise />}></Route>
+            <Route
+              path="/addExercise"
+              element={<AddExercise user={user} />}
+            ></Route>
           </Routes>
         </main>
       </BrowserRouter>

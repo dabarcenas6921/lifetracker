@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
 import {
   Container,
   Typography,
@@ -18,15 +17,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export default function Exercise() {
+export default function Exercise({ user }) {
   const [exerciseData, setExerciseData] = useState([]);
   //On load, get exerciseData from the link...
   useEffect(() => {
-    axios.get("http://localhost:3001/topics/exercise").then((response) => {
-      console.log(response.data);
-      setExerciseData(response.data.exerciseData);
-    });
-  }, []);
+    axios
+      .get(`http://localhost:3001/topics/exercise/${user.id}`)
+      .then((response) => {
+        console.log(response.data);
+        setExerciseData(response.data.exerciseData);
+      });
+  }, [user.id]);
 
   const renderExerciseCards = () => {
     if (exerciseData.length > 0) {
@@ -108,7 +109,7 @@ export default function Exercise() {
   );
 }
 
-export function AddExercise() {
+export function AddExercise({ user }) {
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -125,9 +126,14 @@ export function AddExercise() {
       intensity: intensity,
     };
     console.log(exerciseInfo);
+    //Post the exercise info to the correct user id... Each user should have their own exercise info.
+    let params = {
+      exerciseInfo: exerciseInfo,
+      userId: user.id,
+    };
 
     axios
-      .post("http://localhost:3001/topics/exercise", exerciseInfo)
+      .post("http://localhost:3001/topics/exercise", params)
       .then((response) => {
         console.log("Successfully posted into the database!");
         navigate("/exercise");
@@ -136,7 +142,6 @@ export function AddExercise() {
 
   return (
     <div>
-      <Navbar />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xl" disableGutters={true}>
           <CssBaseline />
