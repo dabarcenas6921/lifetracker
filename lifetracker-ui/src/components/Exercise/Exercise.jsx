@@ -8,17 +8,63 @@ import {
   Box,
   Grid,
   TextField,
+  Card,
+  CardContent,
 } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../../theme";
 import { ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Exercise() {
+  const [exerciseData, setExerciseData] = useState([]);
+  //On load, get exerciseData from the link...
+  useEffect(() => {
+    axios.get("http://localhost:3001/topics/exercise").then((response) => {
+      console.log(response.data);
+      setExerciseData(response.data.exerciseData);
+    });
+  }, []);
+
+  const renderExerciseCards = () => {
+    if (exerciseData.length > 0) {
+      return (
+        <Grid container spacing={4}>
+          {exerciseData.map((exercise, idx) => (
+            <ExerciseCard
+              key={idx}
+              exerciseName={exercise.name}
+              exerciseCategory={exercise.category}
+              duration={exercise.duration}
+              intensity={exercise.intensity}
+              created_at={exercise.created_at}
+            />
+          ))}
+        </Grid>
+      );
+    } else {
+      return (
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{
+            color: "black",
+            top: 100,
+            fontWeight: "bold",
+            mb: 5,
+            mt: 5,
+          }}
+        >
+          Nothing to show!
+        </Typography>
+      );
+    }
+  };
+
   return (
     <div>
-      <Navbar />
       <Container maxWidth="xl" sx={{ mt: "10px" }}>
         <Typography
           variant="h3"
@@ -38,7 +84,6 @@ export default function Exercise() {
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          sx={{ borderBottom: "solid #E2E8F0 2px" }}
         >
           <Typography
             variant="h4"
@@ -57,19 +102,7 @@ export default function Exercise() {
             Add Exercise
           </Button>
         </Stack>
-        <Typography
-          variant="h4"
-          align="center"
-          sx={{
-            color: "black",
-            top: 100,
-            fontWeight: "bold",
-            mb: 5,
-            mt: 5,
-          }}
-        >
-          Nothing to show!
-        </Typography>
+        {renderExerciseCards()}
       </Container>
     </div>
   );
@@ -94,7 +127,7 @@ export function AddExercise() {
     console.log(exerciseInfo);
 
     axios
-      .post("http://localhost:3001/addTopic/exercise", exerciseInfo)
+      .post("http://localhost:3001/topics/exercise", exerciseInfo)
       .then((response) => {
         console.log("Successfully posted into the database!");
         navigate("/exercise");
@@ -194,5 +227,58 @@ export function AddExercise() {
         </Container>
       </ThemeProvider>
     </div>
+  );
+}
+
+export function ExerciseCard({
+  exerciseName,
+  duration,
+  intensity,
+  exerciseCategory,
+  created_at,
+}) {
+  return (
+    <Grid item lg={4}>
+      <Card
+        sx={{
+          boxShadow: 3,
+          backgroundColor: "#FFCC00",
+          color: "black",
+          borderRadius: "15px",
+        }}
+      >
+        <CardContent>
+          <Typography gutterBottom variant="h4" component="div" sx={{ mb: 3 }}>
+            {exerciseName}
+          </Typography>
+          <Grid container sx={{ mb: 5 }}>
+            <Grid item xs={6}>
+              <Typography variant="h5" color="black">
+                Duration
+              </Typography>
+              <Typography variant="h5" color="black">
+                {duration}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="h5" color="black">
+                Intensity
+              </Typography>
+              <Typography variant="h5" color="black">
+                {intensity}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={9}>
+              <Typography variant="body2">Created {created_at}</Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant="body2">{exerciseCategory}</Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 }

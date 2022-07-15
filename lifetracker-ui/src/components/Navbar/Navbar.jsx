@@ -11,7 +11,17 @@ import {
 } from "@mui/material";
 import RunCircleIcon from "@mui/icons-material/RunCircle";
 
-function Navbar({ user }) {
+function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
+  const handleOnClick = () => {
+    if (isLoggedIn) {
+      console.log("pushing button");
+      setIsLoggedIn(false);
+      setUser(null);
+      localStorage.removeItem("token");
+    }
+    console.log("pushing button2");
+  };
+
   return (
     <Container
       maxWidth="xl"
@@ -49,9 +59,19 @@ function Navbar({ user }) {
             <Button color="inherit" href="/sleep">
               Sleep
             </Button>
-            <Button href="/login" color="secondary" variant="contained">
-              Login
-            </Button>
+            {isLoggedIn ? (
+              <Button
+                onClick={handleOnClick}
+                color="secondary"
+                variant="contained"
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button href="/login" color="secondary" variant="contained">
+                Login
+              </Button>
+            )}
             <Button href="/register" color="secondary" variant="contained">
               Register
             </Button>

@@ -29,4 +29,18 @@ router.post("/:topic", (req, res, next) => {
   }
 });
 
+router.get("/:topic", async (req, res, next) => {
+  try {
+    const topic = req.params.topic;
+    console.log(`Getting ${topic} rows from the database...`);
+    if (topic == "exercise") {
+      const exerciseData = await Exercise.getExercises();
+      res.status(201).json({ exerciseData: exerciseData });
+    }
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+});
+
 module.exports = router;

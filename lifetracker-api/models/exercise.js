@@ -2,7 +2,7 @@ const db = require("../db");
 const { BadRequestError } = require("../utils/errors");
 
 class Exercise {
-  static async addExercise(exercise) {
+  static async addExercise(exercise, user) {
     //Adding an exercise into the database...
 
     //First check if all the fields are completed
@@ -41,6 +41,16 @@ class Exercise {
     //return the exercise
     const exerciseRow = result.rows[0];
     return exerciseRow;
+  }
+
+  static async getExercises() {
+    //NEED TO CHANGE TO HAVE USER AS A PARAMETER AND A WHERE COMMAND
+    const result = await db.query(
+      `
+      SELECT * FROM exercise
+      `
+    );
+    return result.rows;
   }
 }
 

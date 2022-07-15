@@ -12,6 +12,7 @@ import { theme } from "../../theme";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import apiClient from "../../services/apiClient";
 
 function Copyright(props) {
   return (
@@ -31,7 +32,7 @@ function Copyright(props) {
   );
 }
 
-export default function SignUp({ setUser }) {
+export default function SignUp({ setUser, setIsLoggedIn }) {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -50,7 +51,6 @@ export default function SignUp({ setUser }) {
       first_name: firstName,
       last_name: lastName,
     };
-    console.log(signupInfo);
 
     try {
       const res = await axios.post(
@@ -59,6 +59,9 @@ export default function SignUp({ setUser }) {
       );
       if (res?.data?.user) {
         setUser(res.data.user);
+        setIsLoggedIn(true);
+        apiClient.setToken(res.data.token);
+        localStorage.setItem("token", res.data.token);
         navigate("/activity");
       }
     } catch (err) {
@@ -68,7 +71,6 @@ export default function SignUp({ setUser }) {
 
   return (
     <div className="signup">
-      <Navbar />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="sm" disableGutters={true}>
           <CssBaseline />

@@ -6,10 +6,10 @@ const router = express.Router();
 
 router.get("/me", security.requireAuthenticatedUser, async (req, res, next) => {
   try {
-    console.log(res.locals.user);
-    const user = res.locals.user;
-    // const user = await User.fetchUserByUsername(username);
-    return res.status(200).json({ user });
+    const { username } = res.locals.user;
+    const user = await User.fetchUserByUsername(username);
+    const publicUser = await User.makePublicUser(user);
+    return res.status(200).json({ user: publicUser });
   } catch (err) {
     next(err);
   }

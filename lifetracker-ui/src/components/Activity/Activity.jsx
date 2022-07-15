@@ -1,15 +1,11 @@
 import { Typography, Card, CardContent, Container, Grid } from "@mui/material";
 import React from "react";
-import Navbar from "../Navbar/Navbar";
 import Login from "../Login/Login";
 
-export default function Activity({ user, setUser }) {
-  const isAuthenticated = Boolean(user?.email);
-
-  if (isAuthenticated) {
+export default function Activity({ user, setUser, isLoggedIn }) {
+  if (isLoggedIn) {
     return (
       <div className="Portal">
-        <Navbar />
         <Container maxWidth="xl" sx={{ mt: "10px" }}>
           <Typography
             variant="h3"
@@ -22,7 +18,7 @@ export default function Activity({ user, setUser }) {
               mt: 5,
             }}
           >
-            Activity Feed
+            Activity Feed - Hello {user.first_name}!
           </Typography>
           <Grid container spacing={4}>
             <Grid item lg={4}>
@@ -152,8 +148,7 @@ export default function Activity({ user, setUser }) {
         </Container>
       </div>
     );
-  }
-  if (!isAuthenticated) {
+  } else {
     return <Login user={user} setUser={setUser} />;
   }
 }

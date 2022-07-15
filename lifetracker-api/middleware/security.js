@@ -1,10 +1,7 @@
-/** Convenience middleware to handle common auth cases in routes. */
-
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 const { UnauthorizedError } = require("../utils/errors");
 
-//Getting token from authorization header
 const jwtFrom = ({ headers }) => {
   if (headers?.authorization) {
     const [scheme, token] = headers.authorization.split(" ");
@@ -15,14 +12,7 @@ const jwtFrom = ({ headers }) => {
 
   return undefined;
 };
-/**
- * If the request contains a JWT token in the Authorization header,
- * extract that token, convert the credentials into a user, and attach
- *  it to the response's locals property.
- *
- * https://expressjs.com/en/5x/api.html#res.locals
- *
- */
+
 const extractUserFromJwt = (req, res, next) => {
   try {
     const token = jwtFrom(req);
@@ -36,28 +26,22 @@ const extractUserFromJwt = (req, res, next) => {
   }
 };
 
-/**
- * Ensure that a verified user is logged in.
- *
- * If not throw an UnauthorizedError
- *
- *
- */
 const requireAuthenticatedUser = (req, res, next) => {
   try {
     const { user } = res.locals;
-    if (!user?.username) {
-      res.locals.user = null;
+
+    if (!user?.email) {
       throw new UnauthorizedError();
     }
+
     return next();
-  } catch (error) {
-    return next(error);
+  } catch (err) {
+    return next(err);
   }
 };
 
 module.exports = {
-  jwtFrom,
-  extractUserFromJwt,
   requireAuthenticatedUser,
+  extractUserFromJwt,
+  jwtFrom,
 };

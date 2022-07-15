@@ -46,14 +46,7 @@ class ApiClient {
 
   async getUser() {
     return await this.request({
-      endpoint: "/me",
-      method: "GET",
-    });
-  }
-
-  async getTracking(type) {
-    return await this.request({
-      endpoint: `/me/${type}`,
+      endpoint: "/auth/me",
       method: "GET",
     });
   }

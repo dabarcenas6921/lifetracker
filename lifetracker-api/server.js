@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(security.extractUserFromJwt);
 
 app.use("/auth", authRouter);
-app.use("/addTopic/", topicRouter);
+app.use("/topics/", topicRouter);
 
 app.use((req, res, next) => {
   return next(new NotFoundError());

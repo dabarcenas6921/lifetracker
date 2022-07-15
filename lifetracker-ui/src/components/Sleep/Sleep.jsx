@@ -5,7 +5,6 @@ import { Container, Typography } from "@mui/material";
 export default function Sleep() {
   return (
     <div>
-      <Navbar />
       <Container maxWidth="xl" sx={{ mt: "10px" }}>
         <Typography
           variant="h3"

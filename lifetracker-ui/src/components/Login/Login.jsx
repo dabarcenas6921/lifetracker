@@ -14,6 +14,7 @@ import Navbar from "../Navbar/Navbar";
 import { theme } from "../../theme";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import apiClient from "../../services/apiClient";
 
 function Copyright(props) {
   return (
@@ -33,7 +34,7 @@ function Copyright(props) {
   );
 }
 
-export default function Login({ user, setUser }) {
+export default function Login({ user, setUser, setIsLoggedIn }) {
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -46,26 +47,25 @@ export default function Login({ user, setUser }) {
       username: username,
       password: password,
     };
-    console.log(loginInfo);
+    // console.log(loginInfo);
 
-    try {
-      const res = await axios.post(
-        "http://localhost:3001/auth/login",
-        loginInfo
-      );
-      if (res?.data?.user) {
-        setUser(res.data.user);
-        console.log(res.data.user);
+    axios
+      .post("http://localhost:3001/auth/login", loginInfo)
+      .then((response) => {
+        setIsLoggedIn(true);
+        console.log(response.data.user);
+        setUser(response.data.user);
+        apiClient.setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
         navigate("/activity");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
     <div className="login">
-      <Navbar />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="sm" disableGutters={true}>
           <CssBaseline />
