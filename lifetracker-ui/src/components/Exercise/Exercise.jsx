@@ -16,15 +16,15 @@ import { ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Login from "../Login/Login";
 
-export default function Exercise({ user }) {
+export default function Exercise({ user, setUser, isLoggedIn, setIsLoggedIn }) {
   const [exerciseData, setExerciseData] = useState([]);
   //On load, get exerciseData from the link...
   useEffect(() => {
     axios
       .get(`http://localhost:3001/topics/exercise/${user.id}`)
       .then((response) => {
-        console.log(response.data);
         setExerciseData(response.data.exerciseData);
       });
   }, [user.id]);
@@ -64,31 +64,13 @@ export default function Exercise({ user }) {
     }
   };
 
-  return (
-    <div>
-      <Container maxWidth="xl" sx={{ mt: "10px" }}>
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{
-            color: "black",
-            top: 100,
-            fontWeight: "bold",
-            mb: 5,
-            mt: 5,
-          }}
-        >
-          Exercise
-        </Typography>
-
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+  if (isLoggedIn) {
+    return (
+      <div>
+        <Container maxWidth="xl" sx={{ mt: "10px" }}>
           <Typography
-            variant="h4"
-            align="left"
+            variant="h3"
+            align="center"
             sx={{
               color: "black",
               top: 100,
@@ -97,16 +79,40 @@ export default function Exercise({ user }) {
               mt: 5,
             }}
           >
-            Overview
+            Exercise
           </Typography>
-          <Button color="secondary" variant="contained" href="/addExercise">
-            Add Exercise
-          </Button>
-        </Stack>
-        {renderExerciseCards()}
-      </Container>
-    </div>
-  );
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography
+              variant="h4"
+              align="left"
+              sx={{
+                color: "black",
+                top: 100,
+                fontWeight: "bold",
+                mb: 5,
+                mt: 5,
+              }}
+            >
+              Overview
+            </Typography>
+            <Button color="secondary" variant="contained" href="/addExercise">
+              Add Exercise
+            </Button>
+          </Stack>
+          {renderExerciseCards()}
+        </Container>
+      </div>
+    );
+  } else {
+    return (
+      <Login user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+    );
+  }
 }
 
 export function AddExercise({ user }) {

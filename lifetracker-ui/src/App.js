@@ -17,7 +17,6 @@ function App() {
   useEffect(() => {
     const fetchAuthedUser = async () => {
       const data = await apiClient.getUser();
-      console.log(data.data);
       if (data.data) {
         setIsLoggedIn(true);
         setUser(data.data.user);
@@ -26,13 +25,10 @@ function App() {
     };
 
     const token = localStorage.getItem("token");
-    console.log(token);
 
     if (token) {
       apiClient.setToken(token);
       fetchAuthedUser();
-    } else {
-      setIsLoggedIn(false);
     }
   }, []);
 
@@ -89,7 +85,17 @@ function App() {
                 />
               }
             ></Route>
-            <Route path="/exercise" element={<Exercise user={user} />}></Route>
+            <Route
+              path="/exercise"
+              element={
+                <Exercise
+                  user={user}
+                  setUser={setUser}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              }
+            ></Route>
             <Route
               path="/nutrition"
               element={<Nutrition user={user} />}

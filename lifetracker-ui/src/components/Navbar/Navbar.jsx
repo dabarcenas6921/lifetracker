@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import RunCircleIcon from "@mui/icons-material/RunCircle";
 import { useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
@@ -46,21 +47,26 @@ function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
             variant="h6"
             sx={{ display: { xs: "none", sm: "block" }, flexGrow: 1 }}
           >
-            <Link href="/" underline="none" color="inherit">
+            <Link
+              to="/"
+              component={RouterLink}
+              underline="none"
+              color="inherit"
+            >
               LifeTracker
             </Link>
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button color="inherit" href="/activity">
+            <Button color="inherit" to="/activity" component={RouterLink}>
               Activity
             </Button>
-            <Button color="inherit" href="/exercise">
+            <Button color="inherit" to="/exercise" component={RouterLink}>
               Exercise
             </Button>
-            <Button color="inherit" href="/nutrition">
+            <Button color="inherit" to="/nutrition" component={RouterLink}>
               Nutrition
             </Button>
-            <Button color="inherit" href="/sleep">
+            <Button color="inherit" to="/sleep" component={RouterLink}>
               Sleep
             </Button>
             {isLoggedIn ? (
@@ -72,12 +78,22 @@ function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
                 Logout
               </Button>
             ) : (
-              <Button href="/login" color="secondary" variant="contained">
+              <Button
+                to="/login"
+                color="secondary"
+                variant="contained"
+                component={RouterLink}
+              >
                 Login
               </Button>
             )}
             {isLoggedIn ? null : (
-              <Button href="/register" color="secondary" variant="contained">
+              <Button
+                to="/register"
+                component={RouterLink}
+                color="secondary"
+                variant="contained"
+              >
                 Register
               </Button>
             )}
