@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../theme";
-import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../services/apiClient";

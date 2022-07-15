@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
-import Navbar from "../Navbar/Navbar";
 import { theme } from "../../theme";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +52,6 @@ export default function Login({ user, setUser, setIsLoggedIn }) {
       .post("http://localhost:3001/auth/login", loginInfo)
       .then((response) => {
         setIsLoggedIn(true);
-        console.log(response.data.user);
         setUser(response.data.user);
         apiClient.setToken(response.data.token);
         localStorage.setItem("token", response.data.token);

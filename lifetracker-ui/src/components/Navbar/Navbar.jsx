@@ -18,13 +18,11 @@ function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
 
   const handleOnClick = () => {
     if (isLoggedIn) {
-      console.log("pushing button");
       setIsLoggedIn(false);
       setUser(null);
       localStorage.removeItem("token");
       navigate("/login");
     }
-    console.log("pushing button2");
   };
 
   return (

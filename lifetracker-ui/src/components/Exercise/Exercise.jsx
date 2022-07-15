@@ -26,6 +26,9 @@ export default function Exercise({ user, setUser, isLoggedIn, setIsLoggedIn }) {
       .get(`http://localhost:3001/topics/exercise/${user.id}`)
       .then((response) => {
         setExerciseData(response.data.exerciseData);
+      })
+      .catch((e) => {
+        console.log("id is empty");
       });
   }, [user.id]);
 
