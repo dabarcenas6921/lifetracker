@@ -1,8 +1,8 @@
 # Week 3 Assignment: Life Tracker
 
-Submitted by: **NAME**
+Submitted by: David Barcenas
 
-Deployed Application: [Lifetracker Deployed Site](ADD_LINK_HERE)
+Deployed Application: [Lifetracker Deployed Site](https://lifetracker-db.surge.sh/activity)
 
 ## Application Features
 
@@ -40,9 +40,7 @@ Implement any of the following features to improve the application:
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+VIDEO WALKTHROUGH OF APP: https://www.loom.com/share/e6dcd0f6e39c4862bbba34dea54d89c7
 
 ### Reflection
 
