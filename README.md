@@ -8,24 +8,24 @@ Deployed Application: [Lifetracker Deployed Site](ADD_LINK_HERE)
 
 ### Core Features
 
-- [ ] **The Nav Bar:** Implement customized views for users who are logged in vs not logged in.
-  - [ ] If the user is logged in, it should display a **Sign Out** button.
-  - [ ] If no user is logged in, it should display **Login** and **Register** buttons
-  - [ ] Display a logo on the far left side, and contain links to the individual detailed activity page.
-- [ ] **The Landing Page:** Display a large hero image and a brief blurb on what this application is about
-- [ ] **Login Page:** A form that allows users to login with email and password.
-- [ ] **Registration Page:** A form that allows the user to sign up with their email, password, username, first name, and last name.
-- [ ] When a user first authenticates, they should be redirected to an authenticated view (i.e the detailed activity page). When they sign out, all frontend data should be reset.
-- [ ] Users have access to an overview Activity page that show one summary statistic about each of the 3 types of activity tracked.
-- [ ] The API should have a `security` middleware that only allows authenticated users to access resources and only allows users to access resources about themselves.
-- [ ] Users should have the ability to track at least **1** types of activities (i.e Nutrition, Exercise, Sleep, etc.). Each activity should be tracked on separate pages.
-- [ ] Deployed website with Heroku & Surge.
+- [x] **The Nav Bar:** Implement customized views for users who are logged in vs not logged in.
+  - [x] If the user is logged in, it should display a **Sign Out** button.
+  - [x] If no user is logged in, it should display **Login** and **Register** buttons
+  - [x] Display a logo on the far left side, and contain links to the individual detailed activity page.
+- [x] **The Landing Page:** Display a large hero image and a brief blurb on what this application is about
+- [x] **Login Page:** A form that allows users to login with email and password.
+- [x] **Registration Page:** A form that allows the user to sign up with their email, password, username, first name, and last name.
+- [x] When a user first authenticates, they should be redirected to an authenticated view (i.e the detailed activity page). When they sign out, all frontend data should be reset.
+- [x] Users have access to an overview Activity page that show one summary statistic about each of the 3 types of activity tracked.
+- [x] The API should have a `security` middleware that only allows authenticated users to access resources and only allows users to access resources about themselves.
+- [x] Users should have the ability to track at least **1** types of activities (i.e Nutrition, Exercise, Sleep, etc.). Each activity should be tracked on separate pages.
+- [x] Deployed website with Heroku & Surge.
 
 **Detailed Activity Page:**
 
-- [ ] The detailed activity page should display a feed of all previous tracked activities.
-- [ ] The detailed activity should contain a form to contain relevant information. (i.e if tracking nutrition this form allows the user to capture calories, timestamp, image, category, etc.)
-- [ ] The activity tracked should be given a unique id for easy lookup.
+- [x] The detailed activity page should display a feed of all previous tracked activities.
+- [x] The detailed activity should contain a form to contain relevant information. (i.e if tracking nutrition this form allows the user to capture calories, timestamp, image, category, etc.)
+- [x] The activity tracked should be given a unique id for easy lookup.
       `TODO://` Add link to table schema in the link code below. Your file should end in `.sql` and show your schema for the detailed activities table. (🚫 Remove this paragraph after adding schema link)
   - [Table Schema](📝ADD LINK TO TABLE SCHEMA.sql HERE!)
 
@@ -48,22 +48,22 @@ Implement any of the following features to improve the application:
 
 - Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-[Add your response here]
+Yes, the topics discussed in the labs helped to prepare me to complete the assignment.
 
 - If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
 
-[Add your response here]
+If I had more time, I would've added more features to my app such as data analytics (graphs, charts, etc.) and ways to add friends and view their progress. It would've been nice to also add loading pages/icons to make the website more interactive.
 
 - Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-[Add your response here]
+My project demo went relatively well. I still need to work on authenticating users on every route. I wish I had actually set up my "logged in" status differently as it is definitely a little buggy.
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+Material-UI for the frontend: mui.com
 
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
 
-[Add your response here]
+Shoutout to Ammar because he helped me out a lot with setting up my authentication and finding small bugs in my code.

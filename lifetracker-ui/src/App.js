@@ -6,7 +6,7 @@ import Activity from "./components/Activity/Activity";
 import { useState, useEffect } from "react";
 import Exercise, { AddExercise } from "./components/Exercise/Exercise";
 import Nutrition, { AddNutrition } from "./components/Nutrition/Nutrition";
-import Sleep from "./components/Sleep/Sleep";
+import Sleep, { AddSleep } from "./components/Sleep/Sleep";
 import apiClient from "./services/apiClient";
 import Navbar from "./components/Navbar/Navbar";
 
@@ -116,6 +116,7 @@ function App() {
               path="/addNutrition"
               element={<AddNutrition user={user} />}
             ></Route>
+            <Route path="/addSleep" element={<AddSleep user={user} />}></Route>
           </Routes>
         </main>
       </BrowserRouter>

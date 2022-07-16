@@ -17,7 +17,8 @@ CREATE TABLE nutrition (
     calories        INTEGER NOT NULL DEFAULT 0,
     image_url       TEXT NOT NULL,
     user_id         INTEGER NOT NULL,
-    created_at      TIMESTAMP NOT NULL DEFAULT NOW()
+    created_at      TIMESTAMP NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE exercise (
@@ -27,5 +28,15 @@ CREATE TABLE exercise (
     duration        INTEGER NOT NULL DEFAULT 0,
     intensity       INTEGER NOT NULL DEFAULT 0,
     user_id         INTEGER NOT NULL,
-    created_at      TIMESTAMP NOT NULL DEFAULT NOW()
+    created_at      TIMESTAMP NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE sleep (
+  id                SERIAL PRIMARY KEY,
+  start_time        TIMESTAMP NOT NULL,
+  end_time          TIMESTAMP NOT NULL,
+  created_at        TIMESTAMP NOT NULL DEFAULT NOW(),
+  user_id           INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
