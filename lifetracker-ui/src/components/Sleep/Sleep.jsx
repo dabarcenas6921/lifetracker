@@ -16,6 +16,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../theme";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Login from "../Login/Login";
 
 export default function Sleep({ user, setUser, isLoggedIn, setIsLoggedIn }) {
   const [sleepData, setSleepData] = useState([]);
@@ -44,7 +45,7 @@ export default function Sleep({ user, setUser, isLoggedIn, setIsLoggedIn }) {
               <SleepCard
                 key={idx}
                 startDate={d1.toDateString()}
-                startTime={d2.toLocaleString()}
+                startTime={d1.toLocaleString()}
                 endTime={d2.toLocaleString()}
                 totalHours={totalHours.toString()}
               />
@@ -71,31 +72,13 @@ export default function Sleep({ user, setUser, isLoggedIn, setIsLoggedIn }) {
     }
   };
   //Main Sleep Page
-  return (
-    <div>
-      <Container maxWidth="xl" sx={{ mt: "10px" }}>
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{
-            color: "black",
-            top: 100,
-            fontWeight: "bold",
-            mb: 5,
-            mt: 5,
-          }}
-        >
-          Sleep
-        </Typography>
-
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+  if (isLoggedIn) {
+    return (
+      <div>
+        <Container maxWidth="xl" sx={{ mt: "10px" }}>
           <Typography
-            variant="h4"
-            align="left"
+            variant="h3"
+            align="center"
             sx={{
               color: "black",
               top: 100,
@@ -104,16 +87,40 @@ export default function Sleep({ user, setUser, isLoggedIn, setIsLoggedIn }) {
               mt: 5,
             }}
           >
-            Overview
+            Sleep
           </Typography>
-          <Button color="secondary" variant="contained" href="/addSleep">
-            Add Sleep
-          </Button>
-        </Stack>
-        {renderSleepCards()}
-      </Container>
-    </div>
-  );
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography
+              variant="h4"
+              align="left"
+              sx={{
+                color: "black",
+                top: 100,
+                fontWeight: "bold",
+                mb: 5,
+                mt: 5,
+              }}
+            >
+              Overview
+            </Typography>
+            <Button color="secondary" variant="contained" href="/addSleep">
+              Add Sleep
+            </Button>
+          </Stack>
+          {renderSleepCards()}
+        </Container>
+      </div>
+    );
+  } else {
+    return (
+      <Login user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+    );
+  }
 }
 //Add Sleep Form
 export function AddSleep({ user }) {

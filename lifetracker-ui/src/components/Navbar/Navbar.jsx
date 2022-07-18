@@ -19,7 +19,7 @@ function Navbar({ user, setUser, isLoggedIn, setIsLoggedIn }) {
   const handleOnClick = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
-      setUser(null);
+      setUser({});
       localStorage.removeItem("token");
       navigate("/login");
     }

@@ -107,7 +107,17 @@ function App() {
                 />
               }
             ></Route>
-            <Route path="/sleep" element={<Sleep user={user} />}></Route>
+            <Route
+              path="/sleep"
+              element={
+                <Sleep
+                  user={user}
+                  setUser={setUser}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              }
+            ></Route>
             <Route
               path="/addExercise"
               element={<AddExercise user={user} />}

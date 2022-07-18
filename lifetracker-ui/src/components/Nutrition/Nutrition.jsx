@@ -17,6 +17,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../theme";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Login from "../Login/Login";
 
 export default function Nutrition({
   user,
@@ -73,31 +74,13 @@ export default function Nutrition({
     }
   };
   //Main Nutrition Page
-  return (
-    <div>
-      <Container maxWidth="xl" sx={{ mt: "10px" }}>
-        <Typography
-          variant="h3"
-          align="center"
-          sx={{
-            color: "black",
-            top: 100,
-            fontWeight: "bold",
-            mb: 5,
-            mt: 5,
-          }}
-        >
-          Nutrition
-        </Typography>
-
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+  if (isLoggedIn) {
+    return (
+      <div>
+        <Container maxWidth="xl" sx={{ mt: "10px" }}>
           <Typography
-            variant="h4"
-            align="left"
+            variant="h3"
+            align="center"
             sx={{
               color: "black",
               top: 100,
@@ -106,16 +89,40 @@ export default function Nutrition({
               mt: 5,
             }}
           >
-            Overview
+            Nutrition
           </Typography>
-          <Button color="secondary" variant="contained" href="/addNutrition">
-            Add Food
-          </Button>
-        </Stack>
-        {renderFoodCards()}
-      </Container>
-    </div>
-  );
+
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography
+              variant="h4"
+              align="left"
+              sx={{
+                color: "black",
+                top: 100,
+                fontWeight: "bold",
+                mb: 5,
+                mt: 5,
+              }}
+            >
+              Overview
+            </Typography>
+            <Button color="secondary" variant="contained" href="/addNutrition">
+              Add Food
+            </Button>
+          </Stack>
+          {renderFoodCards()}
+        </Container>
+      </div>
+    );
+  } else {
+    return (
+      <Login user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+    );
+  }
 }
 //Add Nutrition Form
 export function AddNutrition({ user }) {

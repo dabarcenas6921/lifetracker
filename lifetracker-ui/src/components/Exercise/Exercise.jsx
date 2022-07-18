@@ -22,14 +22,16 @@ export default function Exercise({ user, setUser, isLoggedIn, setIsLoggedIn }) {
   const [exerciseData, setExerciseData] = useState([]);
   //On load, get exerciseData from the link...
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/topics/exercise/${user.id}`)
-      .then((response) => {
-        setExerciseData(response.data.exerciseData);
-      })
-      .catch((e) => {
-        console.log("id is empty");
-      });
+    if (user.id != null) {
+      axios
+        .get(`http://localhost:3001/topics/exercise/${user.id}`)
+        .then((response) => {
+          setExerciseData(response.data.exerciseData);
+        })
+        .catch((e) => {
+          console.log("id is empty");
+        });
+    }
   }, [user.id]);
 
   const renderExerciseCards = () => {
