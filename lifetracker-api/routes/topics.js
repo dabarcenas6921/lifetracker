@@ -22,8 +22,10 @@ router.post("/:topic", (req, res, next) => {
       return res.status(201).json(req.body);
     }
     if (topic == "sleep") {
-      const sleepInfo = req.body;
-      Sleep.addSleep(sleepInfo);
+      const sleepInfo = req.body.sleepInfo;
+      const userId = req.body.userId;
+      Sleep.addSleep(sleepInfo, userId);
+      return res.status(201).json(req.body);
     }
   } catch (e) {
     console.log(e);
@@ -43,6 +45,10 @@ router.get("/:topic/:userId", async (req, res, next) => {
     if (topic == "nutrition") {
       const nutritionData = await Nutrition.getNutrition(userId);
       res.status(201).json({ nutritionData: nutritionData, userId: userId });
+    }
+    if (topic == "sleep") {
+      const sleepData = await Sleep.getSleep(userId);
+      res.status(201).json({ sleepData: sleepData, userId: userId });
     }
   } catch (e) {
     console.log(e);

@@ -36,9 +36,20 @@ export default function Sleep({ user, setUser, isLoggedIn, setIsLoggedIn }) {
     if (sleepData.length > 0) {
       return (
         <Grid container spacing={4}>
-          {sleepData.map((sleep, idx) => (
-            <SleepCard key={idx} />
-          ))}
+          {sleepData.map((sleep, idx) => {
+            const d1 = new Date(sleep.startdate);
+            const d2 = new Date(sleep.enddate);
+            const totalHours = Math.abs(d2 - d1) / 3600000;
+            return (
+              <SleepCard
+                key={idx}
+                startDate={d1.toDateString()}
+                startTime={d2.toLocaleString()}
+                endTime={d2.toLocaleString()}
+                totalHours={totalHours.toString()}
+              />
+            );
+          })}
         </Grid>
       );
     } else {
@@ -108,16 +119,22 @@ export default function Sleep({ user, setUser, isLoggedIn, setIsLoggedIn }) {
 export function AddSleep({ user }) {
   const navigate = useNavigate();
 
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState("2022-01-01T12:00");
+  const [endDate, setEndDate] = useState("2022-01-01T12:00");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //NOT WORKING... FIND A WAY TO GET DATES FROM THE TEXTINPUT!
-    console.log("startDate: ", startDate);
-    console.log("endDate: ", endDate);
+    // const data = new FormData(event.currentTarget);
+    // console.log(data.get("startDate"));
+    // const startDate = new Date(data.get("startDate"));
+    // const endDate = new Date(data.get("endDate"));
     // Printing out the data retreived from the signup sheet
-    const sleepInfo = {};
+    console.log("start Date is: ", startDate);
+    console.log("endDate is: ", endDate);
+    const sleepInfo = {
+      startDate: startDate,
+      endDate: endDate,
+    };
     console.log(sleepInfo);
     //Post the exercise info to the correct user id... Each user should have their own exercise info.
     let params = {
@@ -175,6 +192,7 @@ export function AddSleep({ user }) {
                     label="Start Date"
                     type="datetime-local"
                     defaultValue="2022-01-01T12:00"
+                    onChange={(e) => setStartDate(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -183,6 +201,7 @@ export function AddSleep({ user }) {
                     label="End Date"
                     type="datetime-local"
                     defaultValue="2022-01-01T12:00"
+                    onChange={(e) => setEndDate(e.target.value)}
                   />
                 </Grid>
               </Grid>
@@ -203,7 +222,13 @@ export function AddSleep({ user }) {
   );
 }
 
-export function SleepCard({ startDate, startTime, endDate, endTime }) {
+export function SleepCard({
+  startDate,
+  startTime,
+  endDate,
+  endTime,
+  totalHours,
+}) {
   return (
     <Grid item lg={4}>
       <Card
@@ -216,11 +241,12 @@ export function SleepCard({ startDate, startTime, endDate, endTime }) {
       >
         <CardContent>
           <Grid container spacing={3}>
-            <Grid item>
+            <Grid item xs={12}>
               <Typography
                 gutterBottom
                 variant="h4"
                 component="div"
+                align="center"
                 sx={{ mb: 3 }}
               >
                 {startDate}
@@ -228,26 +254,29 @@ export function SleepCard({ startDate, startTime, endDate, endTime }) {
             </Grid>
           </Grid>
           <Grid container sx={{ mb: 5 }}>
-            <Grid item xs={8}>
-              <Typography variant="h5" color="black">
+            <Grid item xs={4}>
+              <Typography variant="h5" align="center" color="black">
                 Start Time
               </Typography>
-              <Typography variant="h5" color="black">
+              <Typography variant="h6" align="center" color="black">
                 {startTime}
               </Typography>
             </Grid>
+            <Grid item xs={4}></Grid>
             <Grid item xs={4}>
-              <Typography variant="h5" color="black">
+              <Typography variant="h5" align="center" color="black">
                 End Time
               </Typography>
-              <Typography variant="h5" color="black">
+              <Typography variant="h6" align="center" color="black">
                 {endTime}
               </Typography>
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={4}>
-              <Typography variant="h5">Total Hours:</Typography>
+            <Grid item xs={12}>
+              <Typography variant="h5" align="center">
+                Total Hours Slept: {totalHours}
+              </Typography>
             </Grid>
           </Grid>
         </CardContent>

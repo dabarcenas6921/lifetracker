@@ -34,8 +34,8 @@ CREATE TABLE exercise (
 
 CREATE TABLE sleep (
   id                SERIAL PRIMARY KEY,
-  start_time        TIMESTAMP NOT NULL,
-  end_time          TIMESTAMP NOT NULL,
+  startDate         TIMESTAMP NOT NULL,
+  endDate           TIMESTAMP NOT NULL,
   created_at        TIMESTAMP NOT NULL DEFAULT NOW(),
   user_id           INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
